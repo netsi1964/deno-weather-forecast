@@ -1,3 +1,6 @@
+// Run locally with:
+// deno run --allow-env --allow-net main.ts
+
 import { Application, Router } from "https://deno.land/x/oak@v12.6.1/mod.ts";
 import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 import "https://deno.land/std@0.207.0/dotenv/load.ts";
