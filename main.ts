@@ -5,7 +5,7 @@ import "https://deno.land/std@0.207.0/dotenv/load.ts";
 const OPENWEATHER_API_KEY = Deno.env.get("OPENWEATHER_API_KEY");
 if (!OPENWEATHER_API_KEY) {
   console.error("OPENWEATHER_API_KEY environment variable is not set");
-  Deno.exit(1);
+  throw new Error("OPENWEATHER_API_KEY environment variable is not set");
 }
 
 interface WeatherData {
