@@ -1,4 +1,4 @@
-const { useState } = React;
+const { useState, useEffect } = React;
 const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = Recharts;
 
 function WeatherApp() {
@@ -7,6 +7,23 @@ function WeatherApp() {
     const [weatherData, setWeatherData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const detectLocation = async () => {
+            try {
+                const response = await fetch('https://ipinfo.io/json');
+                const data = await response.json();
+                if (data.city) {
+                    setCity(data.city);
+                    fetchWeather(unit, data.city);
+                }
+            } catch (err) {
+                console.error('Could not detect location:', err);
+            }
+        };
+
+        detectLocation();
+    }, []);
 
     const getUnitName = (u) => u === 'C' ? 'Celsius' : 'Fahrenheit';
 
