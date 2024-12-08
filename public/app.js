@@ -132,14 +132,14 @@ function WeatherApp() {
 
                 {weatherData && (
                     <div>
-                        <div className="h-64 w-full">
+                        <div className="h-64 w-full mb-8">
                             <ResponsiveContainer>
                                 <LineChart data={weatherData}>
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis dataKey="date" tickFormatter={formatDateShort} />
                                     <YAxis 
                                         label={{ 
-                                            value: `Temperatur (°${unit})`, 
+                                            value: `Temperature in ${getUnitName(unit)}`, 
                                             angle: -90, 
                                             position: 'insideLeft' 
                                         }}
@@ -150,7 +150,7 @@ function WeatherApp() {
                                         type="monotone"
                                         dataKey="temperature"
                                         stroke="#2563eb"
-                                        name={`Temperatur (°${unit})`}
+                                        name="Temperature"
                                         strokeWidth={2}
                                         dot={{ stroke: '#2563eb', strokeWidth: 2, r: 4 }}
                                     />
@@ -158,14 +158,12 @@ function WeatherApp() {
                             </ResponsiveContainer>
                         </div>
 
-                        <div className="mt-4 space-y-2">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {weatherData.map((day, idx) => (
-                                <div key={idx} className="flex items-center justify-between border-b pb-2">
-                                    <span className="font-medium">{formatDateShort(day.date)}</span>
-                                    <div>
-                                        <span>{day.temperature.toFixed(1)}°{unit}</span>
-                                        <span className="ml-2">{day.conditions}</span>
-                                    </div>
+                                <div key={idx} className="bg-white p-4 rounded-lg shadow">
+                                    <div className="text-lg font-medium text-center mb-2">{formatDateShort(day.date)}</div>
+                                    <div className="text-2xl text-center text-blue-600 mb-2">{day.temperature.toFixed(1)}° {getUnitName(unit)}</div>
+                                    <div className="text-gray-600 text-center capitalize">{day.conditions}</div>
                                 </div>
                             ))}
                         </div>

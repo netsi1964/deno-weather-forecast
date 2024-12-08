@@ -2,6 +2,8 @@
 
 A modern weather forecast application built with Deno and React, featuring a 5-day weather forecast with interactive temperature charts.
 
+![Weather Forecast App](image.png)
+
 ## Features
 
 - 🌍 Automatic location detection using IP geolocation
