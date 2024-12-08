@@ -17,6 +17,12 @@ interface WeatherData {
 const router = new Router();
 
 router.get("/api/weather/:city", async (ctx) => {
+  if (!OPENWEATHER_API_KEY) {
+    ctx.response.status = 500;
+    ctx.response.body = { error: "API key not configured" };
+    return;
+  }
+
   const city = ctx.params.city?.trim();
   if (!city) {
     ctx.response.status = 400;
